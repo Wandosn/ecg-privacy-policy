@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Confirmado - ECG PASSO A PASSO</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #3f7cab 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            text-align: center;
+            max-width: 550px;
+            width: 100%;
+            border: 1px solid #e8f4f8;
+        }
+        .logo-section {
+            margin-bottom: 30px;
+        }
+                 .app-logo {
+             width: 100px;
+             height: 100px;
+             margin: 0 auto 15px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             border-radius: 20px;
+             overflow: hidden;
+             box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+             background: linear-gradient(145deg, #ffffff, #f8f9fa);
+             border: 3px solid #e8f4f8;
+         }
+         .app-logo img {
+             width: 100%;
+             height: 100%;
+             object-fit: contain;
+             border-radius: 17px;
+         }
+        .success-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            box-shadow: 0 6px 15px rgba(46, 204, 113, 0.3);
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 32px;
+            font-weight: 700;
+        }
+        .subtitle {
+            color: #3498db;
+            font-size: 20px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .message {
+            color: #5a6c7d;
+            margin-bottom: 30px;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+        .app-info {
+            background: linear-gradient(145deg, #f8feff, #e8f4f8);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.1);
+        }
+        .app-info h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .steps {
+            text-align: left;
+            margin: 20px 0;
+        }
+        .steps li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 18px 35px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            margin: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(231, 76, 60, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+        }
+        .contact-info {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px solid #ecf0f1;
+            color: #7f8c8d;
+            font-size: 15px;
+        }
+        .security-note {
+            background: linear-gradient(145deg, #fff5f5, #ffebee);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 15px;
+            color: #2c3e50;
+            border-left: 4px solid #e74c3c;
+            box-shadow: 0 3px 8px rgba(231, 76, 60, 0.1);
+        }
+        .loading {
+            display: none;
+            color: #3498db;
+            margin-top: 20px;
+        }
+        
+        /* Animação de sucesso */
+        @keyframes checkmark {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .success-icon {
+            animation: checkmark 0.6s ease-in-out;
+        }
+        
+                 /* Efeito ECG */
+         .ecg-line {
+             height: 2px;
+             background: linear-gradient(90deg, #3498db, #2ecc71, #3498db);
+             margin: 20px 0;
+             position: relative;
+             overflow: hidden;
+         }
+         
+         .ecg-line::before {
+             content: '';
+             position: absolute;
+             top: 0;
+             left: -100%;
+             width: 100%;
+             height: 100%;
+             background: linear-gradient(90deg, transparent, #fff, transparent);
+             animation: ecg-pulse 2s infinite;
+         }
+         
+         @keyframes ecg-pulse {
+             0% { left: -100%; }
+             100% { left: 100%; }
+         }
+         
+         .medical-badge {
+             display: inline-block;
+             background: linear-gradient(45deg, #16a085, #1abc9c);
+             color: white;
+             padding: 5px 12px;
+             border-radius: 20px;
+             font-size: 12px;
+             font-weight: 600;
+             margin: 10px auto;
+             text-transform: uppercase;
+             letter-spacing: 0.5px;
+         }
+         
+         /* Responsivo */
+         @media (max-width: 768px) {
+             .container {
+                 padding: 30px 20px;
+                 margin: 10px;
+             }
+             h1 {
+                 font-size: 24px;
+             }
+             .subtitle {
+                 font-size: 16px;
+             }
+             .app-logo {
+                 width: 80px;
+                 height: 80px;
+             }
+         }
+    </style>
+</head>
+ <body>
+     <div class="container">
+         <div class="logo-section">
+                         <div class="app-logo">
+                <img src="https://raw.githubusercontent.com/Wandson/ecg-privacy-policy/main/LOGO.png" alt="ECG PASSO A PASSO">
+            </div>
+             <div class="subtitle">ECG PASSO A PASSO</div>
+             <div class="medical-badge">✚ App Médico Educacional</div>
+         </div>
+         
+         <div class="ecg-line"></div>
+         
+         <div class="success-icon">
+             ✓
+         </div>
+         
+         <h1>Email Confirmado!</h1>
+        
+        <div class="message">
+            <strong>Parabéns!</strong> Seu endereço de email foi confirmado com sucesso. 
+            Agora você pode fazer login no aplicativo e aproveitar todos os recursos educacionais do ECG PASSO A PASSO.
+        </div>
+
+        <div class="app-info">
+            <h3>📱 Próximos Passos:</h3>
+            <ol class="steps">
+                <li><strong>Abra o aplicativo</strong> ECG PASSO A PASSO no seu dispositivo</li>
+                <li><strong>Faça login</strong> com o email que você acabou de confirmar</li>
+                <li><strong>Comece a aprender!</strong> Acesse conteúdos educacionais sobre interpretação de ECG</li>
+            </ol>
+        </div>
+
+        <div class="security-note">
+            <strong>🔒 Segurança:</strong> Se você não solicitou esta confirmação, entre em contato conosco imediatamente em <strong>wmmedecg@gmail.com</strong>
+        </div>
+
+                 <div style="margin: 30px 0;">
+             <p><strong>Não tem o aplicativo ainda?</strong></p>
+             <div class="download-btn" style="background: linear-gradient(45deg, #95a5a6, #7f8c8d); cursor: not-allowed; opacity: 0.8;">
+                 📱 Em Breve na Play Store
+             </div>
+             <p style="font-size: 14px; color: #7f8c8d; margin-top: 10px;">
+                 O aplicativo será publicado em breve. Você receberá uma notificação!
+             </p>
+         </div>
+
+        <div class="loading" id="autoRedirect">
+            <p>🔄 Tentando abrir o aplicativo automaticamente...</p>
+            <small>Se não funcionar, abra o app manualmente</small>
+        </div>
+
+                 <div class="ecg-line"></div>
+         
+         <div class="contact-info">
+             <p><strong>🩺 Precisa de ajuda?</strong></p>
+             <p>📧 Entre em contato: <strong>wmmedecg@gmail.com</strong></p>
+             <p>💊 Aplicativo educacional para profissionais de saúde</p>
+             <p style="margin-top: 15px; color: #3498db; font-weight: 600;">
+                 Desenvolvido para facilitar o aprendizado em cardiologia
+             </p>
+         </div>
+    </div>
+
+    <script>
+        // Detectar se está em um dispositivo móvel
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // Tentar abrir o aplicativo (deep link)
+        function tryOpenApp() {
+            if (isMobile()) {
+                document.getElementById('autoRedirect').style.display = 'block';
+                
+                // Tentar diferentes esquemas de deep link
+                const appSchemes = [
+                    'ecgpassoapasso://auth/confirmed',
+                    'com.ecgmobile.app://auth/confirmed'
+                ];
+                
+                // Tentar cada esquema
+                appSchemes.forEach((scheme, index) => {
+                    setTimeout(() => {
+                        window.location.href = scheme;
+                    }, index * 1000);
+                });
+                
+                // Esconder a mensagem de redirecionamento após 5 segundos
+                setTimeout(() => {
+                    document.getElementById('autoRedirect').style.display = 'none';
+                }, 5000);
+            }
+        }
+
+                 // Executar quando a página carrega
+         window.addEventListener('load', function() {
+             // App ainda não publicado - comentado por enquanto
+             // setTimeout(tryOpenApp, 2000);
+             console.log('Email confirmado! App será publicado em breve.');
+         });
+
+        // Verificar se há parâmetros na URL do Supabase
+        const urlParams = new URLSearchParams(window.location.search);
+        const accessToken = urlParams.get('access_token');
+        const refreshToken = urlParams.get('refresh_token');
+        
+        if (accessToken) {
+            console.log('Email confirmado com sucesso');
+            // Aqui você pode adicionar lógica adicional se necessário
+        }
+    </script>
+</body>
+</html> 
